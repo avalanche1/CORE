@@ -1,10 +1,16 @@
 // @flow strict
 
 export const typeList = ["Crusher", "Mill"];
-export const groupList = ["Operational", "Mechanical", "Electrical", "Mining", "Uncontrolled"];
+export const groupList = [
+  "Operational",
+  "Mechanical",
+  "Electrical",
+  "Mining",
+  "Uncontrolled",
+];
 export const adventList = ["Planned", "Unplanned"];
 // eslint-disable-next-line func-style
-export const getEquipmentList = (type) => {
+export const getEquipmentList = (type: string): Array<string> => {
   /*eslint-disable indent*/
   return type === typeList[0]
     ? [

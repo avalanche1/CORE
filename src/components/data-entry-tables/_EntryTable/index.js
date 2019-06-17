@@ -21,6 +21,7 @@ type Props = {
     table: number,
     columns: {},
   },
+  title: string,
 };
 type State = {
   rows: $PropertyType<Props, "data">, // eslint-disable-line no-undef
@@ -31,8 +32,13 @@ export class EntryTable extends React.PureComponent<Props, State> {
   render() {
     const {widths} = this.props;
     return (
-      <div className="DataTable" style={{width: widths.table}}>
-        <Header as={"span"}>Mining &nbsp;</Header>
+      <div
+        className="DataTable"
+        style={{
+          width: widths.table,
+          marginBottom: 200,
+        }}>
+        <Header as={"span"}>{this.props.title} &nbsp;</Header>
         <button onClick={this.add_row}>Add row</button>
         <Grid
           columns={this.state.columns}
@@ -111,7 +117,11 @@ export class EntryTable extends React.PureComponent<Props, State> {
     } else if (field.type === "Dropdown") {
       return (
         <Select
-          items={field.dropdownValues}
+          items={
+            typeof field.dropdownValues === "function"
+              ? field.dropdownValues(row.machinery)
+              : field.dropdownValues
+          }
           // items={getEquipmentList(row.type)}
           selectedId={row[field.id]}
           onChange={this.onFieldChange.bind(this, row.id, field.id)}

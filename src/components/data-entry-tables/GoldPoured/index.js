@@ -8,15 +8,17 @@ import {EntryTable} from "../_EntryTable";
 import {data} from "./fixtures";
 import {fields} from "./fields.js";
 
-const widths = {
-  table: 1200,
-  columns: {
-    downtimeInfo: 20,
-    minutesOff: 5,
-  },
-};
 export function DowntimeTable() {
-  return <EntryTable data={data} fields={fields} widths={widths}/>;
+  const widths = {
+    table: 1200,
+    columns: {
+      downtimeInfo: 20,
+      minutesOff: 5,
+    },
+  };
+  const title = "Downtime";
+  return <EntryTable data={data} fields={fields} widths={widths} title={title} />;
+  // return <EntryTable data={data} fields={fields} widths={widths}/>;
   // return <EntryTable  {...{widths, fields, data}} />;
   // <>
   //   <Grid divided columns="equal" style={{width: 2060}}>

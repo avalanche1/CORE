@@ -6,7 +6,8 @@ import React           from "react";
 // import "./App.css";
 import {Grid}          from "semantic-ui-react";
 import {TreeMenu}      from "./TreeMenu.js";
-import {DowntimeTable} from "./data-entry-tables/GoldPoured";
+import {DowntimeTable} from "./data-entry-tables/Downtime";
+// import {DowntimeTable} from "./data-entry-tables/GoldPoured";
 
 export function App() {
   return (

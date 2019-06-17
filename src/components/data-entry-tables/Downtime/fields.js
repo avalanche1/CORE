@@ -2,10 +2,14 @@
 
 import React from "react";
 
-import * as ddValues                                 from "./lists.js";
+import * as ddValues from "./lists.js";
 import {handle_date_string, make_items_for_dropdown} from "../helpers";
 
 import type {Fields} from "./types.js";
+
+function make_items_for_equipment_dd(machinery: string): Array<string> {
+  return make_items_for_dropdown(ddValues.getEquipmentList(machinery));
+}
 
 export const fields: Fields = [
   {
@@ -34,9 +38,9 @@ export const fields: Fields = [
   },
   {
     id: "equipment",
-    title: "equipment",
+    title: "Equipment",
     type: "Dropdown",
-    dropdownValues: make_items_for_dropdown(ddValues.getEquipmentList("Crusher")),
+    dropdownValues: make_items_for_equipment_dd,
   },
   {
     id: "downtimeInfo",
