@@ -1,0 +1,101 @@
+{
+  //https://medium.com/@jzarzoso/setting-eslint-on-meteor-for-react-development-10af658b44e2
+  "env": {
+    "node": true,
+    "browser": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "hardcore-fp",
+    "plugin:import/warnings",
+    "plugin:jest/recommended",
+    "plugin:react/recommended",
+    "plugin:meteor/recommended",
+    "plugin:promise/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": ["import", "jest", "react", "react-hooks", "meteor", "promise"],
+  "overrides": [
+    {
+      "files": ["*.test.js", "*.spec.js"],
+      "rules": {
+        "fp/no-unused-expression": "off"
+      }
+    }
+  ],
+  "rules": {
+    "arrow-body-style": "off",
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "fp/no-mutating-methods": [
+      "error",
+      {
+        // Allow reassign Lodash methods
+        "allowedObjects": ["_"]
+      }
+    ],
+    "fp/no-mutation": [
+      "error",
+      {
+        // Allow module.exports
+        "commonjs": true,
+        "allowThis": false,
+        // Allow assigning to window global
+        "exceptions": [{"object": "window"}]
+      }
+    ],
+    "fp/no-nil": "off",
+    "fp/no-unused-expression": "off",
+    "id-length": ["error", {"exceptions": ["e", "f", "i", "v", "x", "y", "z"]}],
+    "import/no-default-export": "error",
+    "indent": ["warn", 2],
+    "lines-around-comment": ["warn", {"ignorePattern": "/prettier-ignore|$FlowFixMe/"}],
+    "max-len": [
+      "warn",
+      {
+        "code": 88,
+        "comments": 120,
+        "tabWidth": 2
+      }
+    ],
+    "max-params": ["error", 6],
+    "multiline-ternary": "off",
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [0, 1]
+      }
+    ],
+    "no-shadow": [
+      "error",
+      {
+        "builtinGlobals": true
+      }
+    ],
+    "no-multi-spaces": "off",
+    "no-param-reassign": ["error", {"props": true}],
+    "no-nested-ternary": "off",
+    "no-undef": "error",
+    "no-unneeded-ternary": "off",
+    "no-unused-vars": "warn",
+    "no-use-before-define": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": ["error", "before", {"overrides": {"=": "ignore"}}],
+    "padding-line-between-statements": "off",
+    "radix": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/display-name": "off",
+    "semi": "warn"
+  },
+  "settings": {}
+}

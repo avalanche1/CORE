@@ -1,0 +1,9 @@
+[options]
+emoji=true
+ # https://github.com/flowtype/flow-typed/issues/586
+
+[ignore]
+.*/node_modules/styled-components/.*
+
+[libs]
+./flow-typed/npm/*
