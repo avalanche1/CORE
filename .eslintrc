@@ -81,6 +81,7 @@
         "builtinGlobals": true
       }
     ],
+    "no-inline-comments": "off",
     "no-multi-spaces": "off",
     "no-param-reassign": ["error", {"props": true}],
     "no-nested-ternary": "off",

@@ -5,7 +5,7 @@ export function pipe(valueBeingPiped, printInterimResults) {
       // eslint-disable-next-line fp/no-let,fp/no-arguments
       // let interimResult = functionsToApplyOnValue[0](valueBeingPiped);
       let interimResult;
-      if (printInterimResults) {devprint(interimResult);}
+      // if (printInterimResults) {devprint(interimResult);}
       // eslint-disable-next-line fp/no-nil
       functionsToApplyOnValue.map((fn, i) => {
         // Array.isArray([])

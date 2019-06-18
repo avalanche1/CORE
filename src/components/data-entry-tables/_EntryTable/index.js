@@ -7,7 +7,7 @@ import {Header} from "semantic-ui-react";
 import {Grid, Input, Select} from "react-spreadsheet-grid";
 import "./EntryTable.css";
 
-import type {Fields, Field} from "../Downtime/types.js";
+import type {Columns, Column} from "./types.js";
 
 type Cell = {
   id: string,
@@ -15,13 +15,14 @@ type Cell = {
   value: Function,
 };
 type Props = {
-  data: Array<{}>,
-  fields: Fields,
+  data: Array<Object>,
+  columns: Columns,
+  title: string,
+  disabledColumnIds: Array<string>,
   widths: {
     table: number,
     columns: {},
   },
-  title: string,
 };
 type State = {
   rows: $PropertyType<Props, "data">, // eslint-disable-line no-undef
@@ -49,9 +50,10 @@ export class EntryTable extends React.PureComponent<Props, State> {
           columnWidthValues={widths.columns}
           blurCurrentFocus={this.state.blurFocus}
           getRowKey={(row) => row.id}
-          // disabledCellChecker={(row, columnId) => {
-          //   return columnId === "date";
-          // }}
+          disabledCellChecker={(row, columnId) => {
+            return this.props.disabledColumnIds.includes(columnId);
+            // return columnId === "date";
+          }}
         />
       </div>
     );
@@ -91,52 +93,55 @@ export class EntryTable extends React.PureComponent<Props, State> {
   }
 
   initColumns() {
-    // prettier-ignore
-    return this.props.fields.map<Cell>((field: Field) => {
+    return this.props.columns.map<Cell>((column: Column) => {
       return {
-        id: field.id,
-        title: field.title,
-        value: (row, {focus}) => this.determine_column_element(field, row, focus)
+        id: column.id,
+        title: column.title,
+        value: (row, {focus}) => this.determine_column_element(column, row, focus),
       };
     });
   }
 
-  //$FlowFixMe
-  determine_column_element(field, row, focus) {
-    if (field.type === "Input") {
+  determine_column_element(column: Column, row: Object, focus: boolean) {
+    if (column.type === "Input") {
       return (
         <Input
-          value={field.valueHandler ? field.valueHandler(row[field.id]) : row[field.id]}
+          value={
+            // If there is a reducer in this column's props - pass it this row
+            // and column values; otherwise set cell value equal to this row and
+            // this column (column.id) intersection value
+            column.reducer ? column.reducer(row, column) : row[column.id]
+          }
           /*Binding is nec. for onFieldChange to be able to see the 3rd arg -
            'value' - see it's implementation*/
-          onChange={this.onFieldChange.bind(this, row.id, field.id)}
+          onChange={this.onFieldChange.bind(this, row.id, column.id)}
           focus={focus}
         />
       );
       // eslint-disable-next-line no-else-return
-    } else if (field.type === "Dropdown") {
+    } else if (column.type === "Dropdown") {
       return (
         <Select
           items={
-            typeof field.dropdownValues === "function"
-              ? field.dropdownValues(row.machinery)
-              : field.dropdownValues
+            column.dropdownValues
+              ? column.dropdownValues
+              : column.getDropdownValues(row.machinery)
           }
           // items={getEquipmentList(row.type)}
-          selectedId={row[field.id]}
-          onChange={this.onFieldChange.bind(this, row.id, field.id)}
+          selectedId={row[column.id]}
+          onChange={this.onFieldChange.bind(this, row.id, column.id)}
           isOpen={focus}
         />
       );
     } else {
-      return <div>Incorrect field.type!</div>;
+      return <div>Incorrect column.type!</div>;
     }
   }
 
-  onFieldChange(rowId: string, field: string, value: string) {
+  onFieldChange(rowId: string, columnId: string, value: string) {
     const nextState = produce(this.state.rows, (draft) => {
       // eslint-disable-next-line no-param-reassign
-      draft.find(({id}) => id === rowId)[field] = value;
+      draft.find(({id}) => id === rowId)[columnId] = value;
       return draft;
     });
     this.setState({

@@ -1,22 +1,20 @@
+/* eslint-disable line-comment-position */
 // @flow strict
 
 import React from "react";
 
 import * as ddValues from "./lists.js";
 import {handle_date_string, make_items_for_dropdown} from "../helpers";
+import {pipe} from "../../../utility-belt/fp/pipe";
 
-import type {Fields} from "./types.js";
+import type {Columns, dropdownValue} from "../_EntryTable/types";
 
-function make_items_for_equipment_dd(machinery: string): Array<string> {
-  return make_items_for_dropdown(ddValues.getEquipmentList(machinery));
-}
-
-export const fields: Fields = [
+export const columns: Columns = [
   {
     id: "date",
     title: "Date",
     type: "Input",
-    valueHandler: handle_date_string,
+    reducer: handle_date_string,
   },
   {
     id: "machinery",
@@ -40,7 +38,7 @@ export const fields: Fields = [
     id: "equipment",
     title: "Equipment",
     type: "Dropdown",
-    dropdownValues: make_items_for_equipment_dd,
+    getDropdownValues: make_items_for_equipment_dd,
   },
   {
     id: "downtimeInfo",
@@ -54,13 +52,15 @@ export const fields: Fields = [
   },
   {
     id: "minutesOff",
-    title: () => (
-      <span>
-        Minutes
-        <br />
-        Off
-      </span>
-    ),
+    title: () => (<span>Minutes<br />Off</span>), // prettier-ignore
     type: "Input",
   },
 ];
+
+function make_items_for_equipment_dd(machinery: string): Array<dropdownValue> {
+  // prettier-ignore
+  return pipe(machinery).thru(
+    ddValues.getEquipmentList,
+    make_items_for_dropdown,
+  );
+}

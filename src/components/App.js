@@ -1,26 +1,35 @@
 // @flow strict
 
-import React           from "react";
+import React, {useState as use_state} from "react";
 
 // import logo from "./logo.svg";
 // import "./App.css";
-import {Grid}          from "semantic-ui-react";
-import {TreeMenu}      from "./TreeMenu.js";
+import {Grid} from "semantic-ui-react";
+import {TreeMenu} from "./TreeMenu.js";
 import {DowntimeTable} from "./data-entry-tables/Downtime";
-// import {DowntimeTable} from "./data-entry-tables/GoldPoured";
+import {GoldPouredTable} from "./data-entry-tables/GoldPoured";
 
 export function App() {
+  const defaultTable = "DowntimeTable";
+  const [activeTable, set_active_table] = use_state(defaultTable);
+
+  // https://reactjs.org/docs/jsx-in-depth.html#choosing-the-type-at-runtime
+  const availableTables = {
+    DowntimeTable,
+    GoldPouredTable,
+  };
+  const TableToDisplay = availableTables[activeTable];
+
   return (
     <div className="App">
       <Grid columns="equal">
         <Grid.Column width={2}>
-          <TreeMenu />
+          <TreeMenu {...{set_active_table}} />
         </Grid.Column>
         <Grid.Column style={{overflowX: "scroll"}}>
-          <DowntimeTable />
+          <TableToDisplay />
         </Grid.Column>
       </Grid>
-      {/* eslint-disable-next-line no-inline-comments */}
       {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

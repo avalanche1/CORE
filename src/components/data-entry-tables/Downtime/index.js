@@ -6,9 +6,11 @@ import React from "react";
 import {EntryTable} from "../_EntryTable";
 
 import {data} from "./fixtures";
-import {fields} from "./fields.js";
+import {columns} from "./columns.js";
 
 export function DowntimeTable() {
+  const title = "Downtime";
+  const disabledColumnIds = [];
   const widths = {
     table: 1200,
     columns: {
@@ -16,10 +18,8 @@ export function DowntimeTable() {
       minutesOff: 5,
     },
   };
-  const title = "Downtime";
-  return <EntryTable data={data} fields={fields} widths={widths} title={title} />;
-  // return <EntryTable data={data} fields={fields} widths={widths}/>;
-  // return <EntryTable  {...{widths, fields, data}} />;
+  // eslint-disable-next-line object-property-newline
+  return <EntryTable {...{data, columns, title, disabledColumnIds, widths}} />;
   // <>
   //   <Grid divided columns="equal" style={{width: 2060}}>
   //     <Grid.Column>

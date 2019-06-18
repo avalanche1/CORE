@@ -6,20 +6,27 @@ import React from "react";
 import {EntryTable} from "../_EntryTable";
 
 import {data} from "./fixtures";
-import {fields} from "./fields.js";
+import {columns} from "./columns.js";
 
-export function DowntimeTable() {
+export function GoldPouredTable() {
+  const title = "Gold Poured";
+  const disabledColumnIds = [
+    "weightDiff",
+    "totalPouredAuGr",
+    "totalPouredAgGr",
+    "totalPouredAuOz",
+    "totalPouredAgOz",
+  ];
   const widths = {
-    table: 1200,
+    table: 1600,
     columns: {
-      downtimeInfo: 20,
-      minutesOff: 5,
+      weightDiff: 5,
+      siteAu: 5,
+      siteAg: 5,
     },
   };
-  const title = "Downtime";
-  return <EntryTable data={data} fields={fields} widths={widths} title={title} />;
-  // return <EntryTable data={data} fields={fields} widths={widths}/>;
-  // return <EntryTable  {...{widths, fields, data}} />;
+  // eslint-disable-next-line object-property-newline
+  return <EntryTable {...{data, columns, title, disabledColumnIds, widths}} />;
   // <>
   //   <Grid divided columns="equal" style={{width: 2060}}>
   //     <Grid.Column>
