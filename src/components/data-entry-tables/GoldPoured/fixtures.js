@@ -1,7 +1,6 @@
 // @flow strict
 import type {goldPouredRecord} from "./types";
 
-/* eslint-disable object-property-newline */
 export const data: Array<goldPouredRecord> = [
   {
     id: "0",

@@ -8,6 +8,7 @@ import {Grid} from "semantic-ui-react";
 import {TreeMenu} from "./TreeMenu.js";
 import {DowntimeTable} from "./data-entry-tables/Downtime";
 import {GoldPouredTable} from "./data-entry-tables/GoldPoured";
+import {GoldRefinedTable} from "./data-entry-tables/GoldRefined";
 
 export function App() {
   const defaultTable = "DowntimeTable";
@@ -17,6 +18,7 @@ export function App() {
   const availableTables = {
     DowntimeTable,
     GoldPouredTable,
+    GoldRefinedTable,
   };
   const TableToDisplay = availableTables[activeTable];
 

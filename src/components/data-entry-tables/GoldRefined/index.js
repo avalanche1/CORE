@@ -8,9 +8,9 @@ import {EntryTable} from "../_EntryTable";
 import {data} from "./fixtures";
 import {columns} from "./columns.js";
 
-export function DowntimeTable() {
-  const title = "Downtime";
-  const width = 1200;
+export function GoldRefinedTable() {
+  const title = "Gold Refined";
+  const width = 2000;
   // eslint-disable-next-line object-property-newline
   return <EntryTable {...{data, columns, title, width}} />;
   // <>

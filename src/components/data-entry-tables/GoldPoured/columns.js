@@ -46,43 +46,51 @@ export const columns: Columns = [
     title: "Weight Diff",
     type: "Input",
     reducer: calc_weight_diff,
+    disabled: true,
+    width: 5,
   },
   {
     id: "siteAu",
     title: "Site Au",
     type: "Input",
-    reducer: handle_percent
+    reducer: handle_percent,
+    width: 5,
   },
   {
     id: "siteAg",
     title: "Site Ag",
     type: "Input",
-    reducer: handle_percent
+    reducer: handle_percent,
+    width: 5,
   },
   {
     id: "totalPouredAuGr",
     title: () => (<span>Total Metal Poured<br />Au Site(g)</span>), // prettier-ignore
     type: "Input",
+    disabled: true,
   },
   {
     id: "totalPouredAgGr",
     title: () => (<span>Total Metal Poured<br />Ag Site(g)</span>), // prettier-ignore
     type: "Input",
+    disabled: true,
   },
   {
     id: "totalPouredAuOz",
     title: () => (<span>Total Metal Poured<br />Au Site(Oz)</span>), // prettier-ignore
     type: "Input",
+    disabled: true,
   },
   {
     id: "totalPouredAgOz",
     title: () => (<span>Total Metal Poured<br />Ag Site(Oz)</span>), // prettier-ignore
     type: "Input",
+    disabled: true,
   },
 ];
 
 function calc_weight_diff(row: {shippedWeight: number, pouredWeight: number}): number {
   const diff = row.shippedWeight - row.pouredWeight;
-  const result =  round(diff, 1);
+  const result = round(diff, 1);
   return result;
 }

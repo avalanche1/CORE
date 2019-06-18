@@ -10,23 +10,9 @@ import {columns} from "./columns.js";
 
 export function GoldPouredTable() {
   const title = "Gold Poured";
-  const disabledColumnIds = [
-    "weightDiff",
-    "totalPouredAuGr",
-    "totalPouredAgGr",
-    "totalPouredAuOz",
-    "totalPouredAgOz",
-  ];
-  const widths = {
-    table: 1600,
-    columns: {
-      weightDiff: 5,
-      siteAu: 5,
-      siteAg: 5,
-    },
-  };
+  const width = 1600;
   // eslint-disable-next-line object-property-newline
-  return <EntryTable {...{data, columns, title, disabledColumnIds, widths}} />;
+  return <EntryTable {...{data, columns, title, width}} />;
   // <>
   //   <Grid divided columns="equal" style={{width: 2060}}>
   //     <Grid.Column>

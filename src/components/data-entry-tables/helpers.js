@@ -2,13 +2,16 @@
 
 import is from "is_js";
 import {round} from "../../utility-belt/math/round";
-export function handle_date_string(row: Object, column: {id: string}): string {
+
+import type {Column, Columns} from "./_EntryTable/types";
+
+export function handle_date_string(row: Object, column: Column): string {
   const dateValue: Date | string = row[column.id];
   const result = is.date(dateValue) ? dateValue.toDateString() : dateValue;
   return result;
 }
 
-export function handle_percent(row: Object, column: {id: string}): string {
+export function handle_percent(row: Object, column: Column): string {
   const float: number = row[column.id];
   const result = round(float, 2); // eslint-disable-line no-magic-numbers
   return result;

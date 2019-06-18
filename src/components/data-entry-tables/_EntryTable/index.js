@@ -1,11 +1,13 @@
 /* eslint-disable lines-around-comment,fp/no-this,fp/no-mutation,fp/no-class,no-shadow */
 // @flow strict
 import React from "react";
-import {produce} from "immer";
 
 import {Header} from "semantic-ui-react";
 import {Grid, Input, Select} from "react-spreadsheet-grid";
 import "./EntryTable.css";
+
+import {produce} from "immer";
+import {get_column_widths, get_disabled_column_ids} from "./helpers.js";
 
 import type {Columns, Column} from "./types.js";
 
@@ -18,11 +20,7 @@ type Props = {
   data: Array<Object>,
   columns: Columns,
   title: string,
-  disabledColumnIds: Array<string>,
-  widths: {
-    table: number,
-    columns: {},
-  },
+  width: number,
 };
 type State = {
   rows: $PropertyType<Props, "data">, // eslint-disable-line no-undef
@@ -31,12 +29,12 @@ type State = {
 };
 export class EntryTable extends React.PureComponent<Props, State> {
   render() {
-    const {widths} = this.props;
+    const {columns, width} = this.props;
     return (
       <div
         className="DataTable"
         style={{
-          width: widths.table,
+          width,
           marginBottom: 200,
         }}>
         <Header as={"span"}>{this.props.title} &nbsp;</Header>
@@ -47,11 +45,12 @@ export class EntryTable extends React.PureComponent<Props, State> {
           // focusOnSingleClick
           isColumnsResizable
           rowHeight={35}
-          columnWidthValues={widths.columns}
+          columnWidthValues={get_column_widths(columns)}
           blurCurrentFocus={this.state.blurFocus}
           getRowKey={(row) => row.id}
           disabledCellChecker={(row, columnId) => {
-            return this.props.disabledColumnIds.includes(columnId);
+            const disabledColumnIds = get_disabled_column_ids(columns);
+            return disabledColumnIds.includes(columnId);
             // return columnId === "date";
           }}
         />

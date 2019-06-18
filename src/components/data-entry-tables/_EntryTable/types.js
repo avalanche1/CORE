@@ -1,6 +1,6 @@
 // @flow strict
 
-export type Columns = Array<Column>;
+export type Columns =  Array<Column>;
 
 export type Column = {
   id: string,
@@ -9,6 +9,8 @@ export type Column = {
   reducer?: Function,
   dropdownValues?: Array<dropdownValue>,
   getDropdownValues?: (string) => Array<dropdownValue>,
+  disabled?: boolean,
+  width?: number
 };
 
 export type dropdownValue = {

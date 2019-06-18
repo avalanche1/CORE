@@ -62,7 +62,7 @@ export function TreeMenu({set_active_table}: Props) {
         // {tableName: "CIL", componentName: ""},
         // {tableName: "STRIP", componentName: ""},
         {tableName: "GPOURED", componentName: "GoldPouredTable"},
-        // {tableName: "GREFINED", componentName: ""},
+        {tableName: "GREFINED", componentName: "GoldRefinedTable"},
         // {tableName: "KPI", componentName: ""},
         // {tableName: "REAGENT", componentName: ""},
         // {tableName: "R-STOCKTAKE", componentName: ""},

@@ -1,7 +1,6 @@
 // @flow strict
 import type {downtimeRecord} from "./types";
 
-/* eslint-disable object-property-newline */
 export const data: Array<downtimeRecord> = [
   {
     id: "0",

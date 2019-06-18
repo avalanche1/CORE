@@ -1,0 +1,9 @@
+New table:
+	- Copy reference table folder
+	- Rename everything
+	- Add component to sidebar navigation
+	- Kreate  types.js from excel column names
+	- Kreate fixtures in excel using helper formulas from a sheet with a table already
+	built
+	- Kreate columns.js using types and excel data for calculated columns
+	- List calculated columns in the disabled columns list in related Table component

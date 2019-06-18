@@ -44,6 +44,7 @@ export const columns: Columns = [
     id: "downtimeInfo",
     title: "Downtime Info",
     type: "Input",
+    width: 20,
   },
   {
     id: "timeOffOn",
@@ -54,6 +55,7 @@ export const columns: Columns = [
     id: "minutesOff",
     title: () => (<span>Minutes<br />Off</span>), // prettier-ignore
     type: "Input",
+    width: 5,
   },
 ];
 
